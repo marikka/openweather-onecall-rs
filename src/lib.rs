@@ -56,7 +56,7 @@ pub struct Current {
 pub struct Minutely {
     #[serde(with = "ts_seconds")]
     dt: DateTime<Utc>,
-    precipitation: u32,
+    precipitation: f32,
 }
 
 #[derive(Deserialize, Debug)]
