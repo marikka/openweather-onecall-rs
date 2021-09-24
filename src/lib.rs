@@ -6,50 +6,50 @@ use serde_derive::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct OnecallResponse {
-    lat: f32,
-    lon: f32,
-    timezone: String,
-    timezone_offset: i32,
-    current: Current,
-    minutely: Vec<Minutely>,
-    hourly: Vec<Hourly>,
-    daily: Vec<Daily>,
+    pub lat: f32,
+    pub lon: f32,
+    pub timezone: String,
+    pub timezone_offset: i32,
+    pub current: Current,
+    pub minutely: Vec<Minutely>,
+    pub hourly: Vec<Hourly>,
+    pub daily: Vec<Daily>,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct Weather {
-    id: u32,
-    main: String,
-    description: String,
-    icon: String,
+    pub id: u32,
+    pub main: String,
+    pub description: String,
+    pub icon: String,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct Rain {
     #[serde(rename = "1h")]
-    one_hour: f32,
+    pub one_hour: f32,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct Current {
     #[serde(with = "ts_seconds")]
-    dt: DateTime<Utc>,
-    sunrise: u32,
-    sunset: u32,
-    temp: f32,
-    feels_like: f32,
-    pressure: u32,
-    humidity: u32,
-    dew_point: f32,
-    uvi: f32,
-    clouds: u32,
-    visibility: u32,
-    wind_speed: f32,
-    wind_deg: u32,
-    wind_gust: Option<f32>,
-    weather: Vec<Weather>,
-    rain: Option<Rain>,
-    alerts: Option<Vec<Alert>>,
+    pub dt: DateTime<Utc>,
+    pub sunrise: u32,
+    pub sunset: u32,
+    pub temp: f32,
+    pub feels_like: f32,
+    pub pressure: u32,
+    pub humidity: u32,
+    pub dew_point: f32,
+    pub uvi: f32,
+    pub clouds: u32,
+    pub visibility: u32,
+    pub wind_speed: f32,
+    pub wind_deg: u32,
+    pub wind_gust: Option<f32>,
+    pub weather: Vec<Weather>,
+    pub rain: Option<Rain>,
+    pub alerts: Option<Vec<Alert>>,
 }
 
 #[derive(Deserialize, Debug)]
@@ -62,79 +62,79 @@ pub struct Minutely {
 #[derive(Deserialize, Debug)]
 pub struct Hourly {
     #[serde(with = "ts_seconds")]
-    dt: DateTime<Utc>,
-    temp: f32,
-    feels_like: f32,
-    pressure: u32,
-    humidity: u32,
-    dew_point: f32,
-    uvi: f32,
-    clouds: u32,
-    visibility: u32,
-    wind_speed: f32,
-    wind_deg: u32,
-    wind_gust: f32,
-    weather: Vec<Weather>,
-    pop: f32,
-    rain: Option<Rain>,
+    pub dt: DateTime<Utc>,
+    pub temp: f32,
+    pub feels_like: f32,
+    pub pressure: u32,
+    pub humidity: u32,
+    pub dew_point: f32,
+    pub uvi: f32,
+    pub clouds: u32,
+    pub visibility: u32,
+    pub wind_speed: f32,
+    pub wind_deg: u32,
+    pub wind_gust: f32,
+    pub weather: Vec<Weather>,
+    pub pop: f32,
+    pub rain: Option<Rain>,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct Temp {
-    day: f32,
-    min: f32,
-    max: f32,
-    night: f32,
-    eve: f32,
-    morn: f32,
+    pub day: f32,
+    pub min: f32,
+    pub max: f32,
+    pub night: f32,
+    pub eve: f32,
+    pub morn: f32,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct FeelsLike {
-    day: f32,
-    night: f32,
-    eve: f32,
-    morn: f32,
+    pub day: f32,
+    pub night: f32,
+    pub eve: f32,
+    pub morn: f32,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct Daily {
     #[serde(with = "ts_seconds")]
-    dt: DateTime<Utc>,
+    pub dt: DateTime<Utc>,
     #[serde(with = "ts_seconds")]
-    sunrise: DateTime<Utc>,
+    pub sunrise: DateTime<Utc>,
     #[serde(with = "ts_seconds")]
-    sunset: DateTime<Utc>,
+    pub sunset: DateTime<Utc>,
     #[serde(with = "ts_seconds")]
-    moonrise: DateTime<Utc>,
+    pub moonrise: DateTime<Utc>,
     #[serde(with = "ts_seconds")]
-    moonset: DateTime<Utc>,
-    moon_phase: f32,
-    temp: Temp,
-    feels_like: FeelsLike,
-    pressure: u32,
-    humidity: u32,
-    dew_point: f32,
-    wind_speed: f32,
-    wind_deg: u32,
-    wind_gust: f32,
-    weather: Vec<Weather>,
-    clouds: u32,
-    pop: f32,
-    rain: Option<f32>,
-    uvi: f32,
+    pub moonset: DateTime<Utc>,
+    pub moon_phase: f32,
+    pub temp: Temp,
+    pub feels_like: FeelsLike,
+    pub pressure: u32,
+    pub humidity: u32,
+    pub dew_point: f32,
+    pub wind_speed: f32,
+    pub wind_deg: u32,
+    pub wind_gust: f32,
+    pub weather: Vec<Weather>,
+    pub clouds: u32,
+    pub pop: f32,
+    pub rain: Option<f32>,
+    pub uvi: f32,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct Alert {
-    sender_name: String,
-    event: String,
+    pub sender_name: String,
+    pub event: String,
     #[serde(with = "ts_seconds")]
-    start: DateTime<Utc>,
+    pub start: DateTime<Utc>,
     #[serde(with = "ts_seconds")]
-    end: DateTime<Utc>,
-    description: String,
-    tags: Vec<String>,
+    pub end: DateTime<Utc>,
+    pub description: String,
+    pub tags: Vec<String>,
 }
 
 pub struct Coords {
