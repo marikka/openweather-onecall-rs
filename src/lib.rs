@@ -4,19 +4,19 @@ use chrono::{serde::ts_seconds, DateTime, Utc};
 use reqwest::blocking::get;
 use serde_derive::Deserialize;
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct OnecallResponse {
     pub lat: f32,
     pub lon: f32,
     pub timezone: String,
     pub timezone_offset: i32,
     pub current: Current,
-    pub minutely: Vec<Minutely>,
+    pub minutely: Option<Vec<Minutely>>,
     pub hourly: Vec<Hourly>,
     pub daily: Vec<Daily>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct Weather {
     pub id: u32,
     pub main: String,
@@ -24,18 +24,20 @@ pub struct Weather {
     pub icon: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct Rain {
     #[serde(rename = "1h")]
     pub one_hour: f32,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct Current {
     #[serde(with = "ts_seconds")]
     pub dt: DateTime<Utc>,
-    pub sunrise: u32,
-    pub sunset: u32,
+    #[serde(with = "ts_seconds")]
+    pub sunrise: DateTime<Utc>,
+    #[serde(with = "ts_seconds")]
+    pub sunset: DateTime<Utc>,
     pub temp: f32,
     pub feels_like: f32,
     pub pressure: u32,
@@ -52,14 +54,14 @@ pub struct Current {
     pub alerts: Option<Vec<Alert>>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct Minutely {
     #[serde(with = "ts_seconds")]
     dt: DateTime<Utc>,
     precipitation: f32,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct Hourly {
     #[serde(with = "ts_seconds")]
     pub dt: DateTime<Utc>,
@@ -79,7 +81,7 @@ pub struct Hourly {
     pub rain: Option<Rain>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct Temp {
     pub day: f32,
     pub min: f32,
@@ -89,7 +91,7 @@ pub struct Temp {
     pub morn: f32,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct FeelsLike {
     pub day: f32,
     pub night: f32,
@@ -97,7 +99,7 @@ pub struct FeelsLike {
     pub morn: f32,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct Daily {
     #[serde(with = "ts_seconds")]
     pub dt: DateTime<Utc>,
@@ -125,7 +127,7 @@ pub struct Daily {
     pub uvi: f32,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct Alert {
     pub sender_name: String,
     pub event: String,
@@ -137,6 +139,7 @@ pub struct Alert {
     pub tags: Vec<String>,
 }
 
+#[derive(Deserialize, Debug, Clone)]
 pub struct Coords {
     pub lat: f32,
     pub lon: f32,
